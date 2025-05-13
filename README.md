@@ -28,7 +28,7 @@ To apply supervised learning techniques for early and accurate breast cancer pre
 📂 breast-cancer-prediction/
 │
 ├── 📄 README.md              # Project documentation
-├── 📊 Breast_Cancer_Prediction.ipynb  # Main notebook
+├── 📊 cancerPrediction.ipynb  # Main notebook
 ├── 📁 data/                  # (Optional) Folder for raw/processed datasets
 ```
 
