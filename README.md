@@ -41,7 +41,7 @@ Features related to **tumor shape irregularity** showed strongest predictive pow
 - `radius_worst`: Reflects largest tumor radius observed
 
 
-![Correlation Plot](https://via.placeholder.com/600x400?text=Top+10+Features+Correlation+Plot)
+![Correlation Plot](https://github.com/giuliabugatti09/Breast-Cancer-Prescription/blob/main/images/matrizdecorrelacao)
 
 **Key Insight:** All top features measure either tumor size or contour irregularity, confirming that malignant tumors tend to have larger, more irregular boundaries.
 
