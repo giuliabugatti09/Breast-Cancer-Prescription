@@ -84,7 +84,7 @@ breast-cancer-prediction/
 
 ## ✉️ **Contact**
 
-**Giulia Bugatti**
+
 [](https://www.google.com/search?q=%5Bhttps://linkedin.com/in/giulia-bugatti-fonseca-226955267/%5D\(https://linkedin.com/in/giulia-bugatti-fonseca-226955267/\))
 [](mailto:giuliabugatti02@gmail.com)
 
