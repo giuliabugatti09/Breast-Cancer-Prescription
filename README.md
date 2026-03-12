@@ -1,94 +1,73 @@
-# 🎗️ Breast Cancer Prediction with Machine Learning
+# 🏥 Precision Health: Breast Cancer Diagnostic Classification
 
-This project develops a machine learning classifier to accurately predict whether a breast tumor is **Malignant (M)** or **Benign (B)** based on features computed from digitized images of fine-needle aspirate (FNA) biopsies.
+> **High-reliability Machine Learning pipeline** designed to classify breast tumors as Malignant or Benign with **97.48% Cross-Validation accuracy**. This project demonstrates a rigorous approach to algorithm selection and hyperparameter optimization for clinical decision support.
 
-## 🌟 **Key Features**
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Latest-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 
-✔ **High-Performance Model:** Logistic Regression achieved **97.48% accuracy** in cross-validation after full `GridSearchCV` tuning.
+---
 
-✔ **Robust Model Selection:** Systematic comparison and `GridSearchCV` tuning of 4 top ML algorithms.
+## 🎯 Executive Summary
+The primary goal was to develop a diagnostic aid tool using Fine-Needle Aspirate (FNA) biopsy data. By comparing multiple architectures and performing exhaustive hyperparameter tuning, the project delivers a model that balances high precision with the critical need for high recall in oncology.
 
-✔ **30-Feature Analysis:** Utilizes 30 clinical features (mean, se, worst) for prediction.
+---
 
-✔ **Ready for Deployment:** Includes serialized `.pkl` files for the model (`breast_cancer_model.pkl`) and the scaler (`scaler.pkl`).
+## 🏗️ Clinical Data Pipeline
+The data follows a standardized medical-grade preprocessing flow:
+1. **Cleaning:** Removal of non-informative features (ID, empty columns).
+2. **Feature Engineering:** Analysis of 30 clinical metrics (radius, texture, perimeter, etc.).
+3. **Scaling:** Implementation of `StandardScaler` to normalize feature influence.
+4. **Optimization:** 5-fold Cross-Validation with `GridSearchCV` across 4 different architectures.
 
-## 📊 **Diagnostic Analysis**
 
-The class distribution in the 569-instance dataset is as follows:
 
-  * **Benign (B):** 357 cases
-  * **Malignant (M):** 212 cases
+---
 
-## 🔗 **Feature Correlation Matrix**
+## 📊 Benchmark & Model Selection
+Instead of using default settings, I conducted a systematic comparison of the **best-tuned versions** of each algorithm:
 
-The exploratory analysis included a heatmap to investigate multicollinearity among the 30 features.
-
-**Key Insight:** The heatmap reveals high positive correlation between features measuring similar characteristics, such as `radius_mean`, `perimeter_mean`, and `area_mean`. This was expected, as they are all metrics of size. Preprocessing with `StandardScaler` ensures the models handle these different scales appropriately.
-
-## 🏆 **Model Performance Comparison**
-
-### Hyperparameter Tuning (GridSearchCV)
-
-Instead of using default parameters, `GridSearchCV` (with 5-fold CV) was used to find the optimal hyperparameters for each of the 4 models. This ensures we are comparing the *best possible version* of each algorithm.
-
-| Algorithm | Best CV Accuracy | Best Parameters |
+| Algorithm | Best CV Accuracy | Key Parameters |
 | :--- | :---: | :--- |
-| **Logistic Regression** | **0.9748** | `{'C': 1.0, 'penalty': 'l2'}` |
-| KNN | 0.9698 | `{'n_neighbors': 7}` |
-| SVM (Linear Kernel) | 0.9672 | `{'C': 0.1}` |
-| Random Forest | 0.9522 | `{'max_depth': None, 'min_samples_leaf': 1, 'n_estimators': 50}` |
+| **Logistic Regression (L2)** | **97.48%** | `C=1.0` |
+| KNN | 96.98% | `k=7` |
+| SVM (Linear) | 96.72% | `C=0.1` |
+| Random Forest | 95.22% | `n_estimators=50` |
 
------
+### Why Logistic Regression?
+While non-linear models are often favored, **Logistic Regression** provided the best balance of performance and **interpretability**. In medicine, understanding *why* a model reached a diagnosis is as crucial as the diagnosis itself.
 
-### Final Model Evaluation: Optimized Logistic Regression
+---
 
-The best model from the `GridSearchCV` (**Logistic Regression**) was then re-trained on the *entire* training set and evaluated on the *unseen* **test set**.
+## 🏆 Final Performance Evaluation
+Testing on **unseen data** confirmed the model's robustness:
 
-| Metric | Test Set Score |
-| :--- | :---: |
-| **Accuracy** | 0.9708 |
-| **Precision** (Malignant) | 0.9836 |
-| **Recall** (Malignant) | 0.9375 |
-| **F1-Score** (Malignant) | 0.9600 |
-
-### Recommendation
-
-**Logistic Regression** is the recommended model. It not only performed best in the rigorous cross-validation tuning (**97.48%**) but also proved excellent generalization on the test set (**97.08%** accuracy).
-
-The **Recall of 0.9375** is a crucial metric in this medical context, indicating the model correctly identified nearly 94% of all malignant cases, thereby minimizing false negatives.
-
-## 🛠️ **Technical Implementation**
-
-### **Data Pipeline**
-
-```
-1. Load Data → 2. EDA → 3. Clean (Drop 'id', 'Unnamed: 32') → 4. Encode (Diagnosis) → 5. StandardScaler → 6. Split (70/30) → 7. GridSearchCV Tuning → 8. Final Evaluation
-```
-
-## 📂 **Project Structure**
-
-```
-breast-cancer-prediction/
-├── images/                 # Folder for storing images (plots, matrices)
-├── data/                   # Folder for storing the dataset
-├── app.py                  # Web application script (Streamlit)
-├── notebook.ipynb          # Jupyter Notebook with exploratory analysis and modeling
-├── requirements.txt        # List of Python dependencies for the project
-├── README.md               # Project documentation
-```
-
-## 🔮 **Future Enhancements**
-
-  * [ ] Use SHAP or LIME to explain model predictions.
-  * [ ] Test on other breast cancer datasets to validate generalization.
-
-## ✉️ **Contact**
+* **General Accuracy:** 97.08%
+* **Precision (Malignant):** 98.36%
+* **Recall (Malignant):** **93.75%** (Critical metric to minimize False Negatives)
+* **F1-Score:** 96.00%
 
 
-[](https://www.google.com/search?q=%5Bhttps://linkedin.com/in/giulia-bugatti-fonseca-226955267/%5D\(https://linkedin.com/in/giulia-bugatti-fonseca-226955267/\))
-[](mailto:giuliabugatti02@gmail.com)
 
------
+---
 
-**Dataset Reference:**
-Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [[http://archive.ics.uci.edu/ml](http://archive.ics.uci.edu/ml)]. Irvine, CA: University of California, School of Information and Computer Science.
+## 🔍 Analytical Insights
+* **Feature Multicollinearity:** EDA revealed high correlations between size-related metrics (radius, area, perimeter). This was handled through normalization to prevent weight bias.
+* **Recall Importance:** The 93.75% recall ensures that the vast majority of malignant cases are caught, which is the primary objective in cancer screening tools.
+
+---
+
+## 🚀 Future Roadmap
+* [ ] **Explainable AI (XAI):** Integrate SHAP values to visualize which clinical features most influence a specific diagnosis.
+* [ ] **Ensemble Methods:** Test Voting Classifiers to further increase Recall.
+* [ ] **External Validation:** Test the model on independent clinical datasets to verify generalization.
+
+---
+
+## ⚙️ Setup & Deployment
+1. **Environment:** `python -m venv venv`
+2. **Install Dependencies:** `pip install -r requirements.txt`
+3. **Run Interactive Dashboard:** `streamlit run app.py`
+
+---
+**Giulia Bugatti** 
