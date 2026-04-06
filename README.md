@@ -46,7 +46,7 @@ Testing on the held-out set confirmed the model's high generalization capability
 * **Test Accuracy:** 97.08%
 * **Recall (Malignant):** **95.24%** *(Primary metric to avoid missed diagnoses)*
 * **Precision (Malignant):** 96.77%
-* **F1-Score:** 96.00%
+* **F1-Score:** 96.00%  
 
 ---
 
